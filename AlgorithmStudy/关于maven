@@ -1,0 +1,57 @@
+http://www.infoq.com/cn/news/2011/01/xxb-maven-3-pom-refactoring
+1：
+<properties>
+  <spring.version>2.5</spring.version>
+</properties>
+  统一使用 ${spring.version}
+2：
+dependencyManagement只会影响现有依赖的配置，但不会引入依赖，而且子模块仍然可以按需引入依赖。
+在多模块Maven项目中，dependencyManagement几乎是必不可少的，因为只有它是才能够有效地帮我们维护依赖一致性。
+那就是在使用dependencyManagement的时候，我们可以不从父模块继承，而是使用特殊的import scope依赖。Sunng将其列为自己的Maven Recipe #0，我再简单介绍下。
+
+Maven的继承和Java的继承一样，是无法实现多重继承的，如果10个、20个甚至更多模块继承自同一个模块，那么按照之前的做法，这个父模块的dependencyManagement会包含大量的依赖
+。如果你想把这些依赖分类以更清晰的管理，那就不可能了，import scope依赖能解决这个问题。你可以把dependencyManagement放到单独的专门用来管理依赖的POM中，然后在需要使用
+依赖的模块中通过import scope依赖，就可以引入dependencyManagement。例如可以写这样一个用于依赖管理的POM：
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.juvenxu.sample</groupId>
+  <artifactId>sample-dependency-infrastructure</artifactId>
+  <packaging>pom</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <dependencyManagement>
+    <dependencies>
+        <dependency>
+          <groupId>junit</groupId>
+          <artifactid>junit</artifactId>
+          <version>4.8.2</version>
+          <scope>test</scope>
+        </dependency>
+        <dependency>
+          <groupId>log4j</groupId>
+          <artifactid>log4j</artifactId>
+          <version>1.2.16</version>
+        </dependency>
+    </dependencies>
+  </dependencyManagement>
+</project>
+然后我就可以通过非继承的方式来引入这段依赖管理配置：
+  <dependencyManagement>
+    <dependencies>
+        <dependency>
+          <groupId>com.juvenxu.sample</groupId>
+          <artifactid>sample-dependency-infrastructure</artifactId>
+          <version>1.0-SNAPSHOT</version>
+          <type>pom</type>
+          <scope>import</scope>
+        </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <dependency>
+    <groupId>junit</groupId>
+    <artifactid>junit</artifactId>
+  </dependency>
+  <dependency>
+    <groupId>log4j</groupId>
+    <artifactid>log4j</artifactId>
+  </dependency>

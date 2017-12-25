@@ -1,0 +1,11 @@
+Adapter设计模式有两种：
+1、类适配器模式(使用继承的适配器) Adapter通过继承使用Adaptee角色
+2、对象适配器模式(使用委托的适配器) 委托：将某个方法中的实际处理交给其它实例的方法 Adapter通过委托使用Adaptee角色
+1：Banner,Print,PrintBanner
+2：Banner,Print2,PrintBanner2
+
+角色：
+Target(对象):负责定义所需的方法。 print, print2
+Client(请求者):负责使用Target进行具体处理。 main
+Adaptee(被适配): Banner
+Adapter(适配):使用Adaptee的方法满足Target的需求。 PrintBanner, PrintBanner2

@@ -1,0 +1,83 @@
+[user]
+	name = Hao
+	email = w4shhhh@126.com
+[alias]
+	s = status  
+    st = status  
+    sb = status -s -b  
+    #############  
+    d = diff  
+    di = diff  
+    dc = diff --cached  
+    dk = diff --check  
+    dck = diff --cached --check  
+    #############  
+    c = commit  
+    ca = commit -a  
+    cm = commit -m  
+    ci = commit  
+    #############  
+    l = log --oneline  
+    lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+    #############  
+    o = checkout  
+    co = checkout  
+    ob = checkout -b  
+    cob = checkout -b  
+    #############  
+    b = branch  
+    bv = branch -vv  
+    ba = branch -a  
+    bd = branch -d  
+    br = branch -r  
+    #############  
+    f = fetch  
+    fo = fetch origin  
+    #############  
+    m = merge  
+    #############  
+    ps = push  
+    pl = pull  
+    pb = pull --rebase  
+    psf = push -f  
+    psu = push -u  
+    plu = pull -u  
+    pso = push origin  
+    plo = pull origin  
+    pbo = pull --rebase origin  
+    psfo = push -f origin  
+    psuo = push -u origin  
+    pluo = pull -u origin  
+    pod = push origin --delete 
+    #############  
+    rb = rebase  
+    #############  
+    re = reset  
+    rh = reset HEAD  
+    reh = reset --hard  
+    rem = reset --mixed  
+    res = reset --soft  
+    rehh = reset --hard HEAD  
+    remh = reset --mixed HEAD  
+    resh = reset --soft HEAD  
+    #############  
+    w = show 
+    #############  
+    human = name-rev --name-only --refs=refs/heads/* 
+	fresh = rm -r --cached . 
+	unchange = update-index --assume-unchanged 
+	###如果要忽略一个目录，打开 git bash，cd到 目标目录下，执行：git update-index --assume-unchanged $(git ls-files | tr '\n' ' ')  
+	dir = $(git ls-files | tr '\n' ' ') 
+	nounchange = update-index --no-assume-unchanged 
+	#############
+	cl = clone 
+[diff]
+    tool = bc
+[difftool "bc"]
+    cmd = \"D:/Program Files/Beyond Compare 3/BComp.exe\" \"$LOCAL\" \"$REMOTE\"
+[difftool]
+    prompt = false
+[merge]
+    tool = bc
+[mergetool "bc"]
+    cmd = \"D:/Program Files/Beyond Compare 3/BComp.exe\" \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\"
