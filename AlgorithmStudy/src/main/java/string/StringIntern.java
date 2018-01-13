@@ -3,7 +3,9 @@ package string;
 import java.util.Random;
 
 /**
- * Created by Administrator on 2017/5/24.
+ * @Author: LUHAO
+ * @Date: 上午10:20 2017/12/26
+ * @Description:
  */
 public class StringIntern {
     static final int MAX = 100000;
